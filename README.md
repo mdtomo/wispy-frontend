@@ -1,19 +1,6 @@
-# Quasar PWA App
 
-> A Quasar PWA project
-
-## Build Setup
-
-``` bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:8081
-$ quasar dev
-
-# build for production with minification
-$ quasar build
-
-# lint code
-$ quasar lint
 ```
+=======
+# wispy-frontend
+Frontend client for Wispysvr
+>>>>>>> 59c1fa7f7870f98cf28ca321ce8599dcaf842cef
