@@ -11,7 +11,7 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 // require(`quasar/dist/quasar.ie.${__THEME}.css`)
 
 import Vue from 'vue'
-import Quasar, { QDataTable, QInput, QCard, QCardTitle, QCardSeparator, QCardMain, QCardActions, QLayout, QToolbar, QRouteTab, QToolbarTitle, QSideLink, QCollapsible, QList, QListHeader, QItem, QItemSide, QItemMain, QIcon, QBtn, QTabs, QDatetime } from 'quasar'
+import Quasar, { QSlider, QDataTable, QField, QInput, QCard, QCardTitle, QCardSeparator, QCardMain, QCardActions, QLayout, QToolbar, QRouteTab, QToolbarTitle, QSideLink, QCollapsible, QList, QListHeader, QItem, QItemSide, QItemMain, QIcon, QBtn, QTabs, QDatetime } from 'quasar'
 import router from './router'
 import axios from 'axios'
 import moment from 'moment'
@@ -25,7 +25,9 @@ Vue.prototype.$auth = auth
 
 Vue.use(Quasar, {
   components: {
+    QSlider,
     QDataTable,
+    QField,
     QInput,
     QCard,
     QCardTitle,

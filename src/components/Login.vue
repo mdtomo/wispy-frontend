@@ -50,9 +50,12 @@ export default {
           this.password = ''
         })
         .catch(error => {
-          this.alertWindow = Alert.create({duration: 3000, html: error.response.data, position: 'bottom-center', enter: 'bounceInUp', leave: 'bounceOutDown'})
+          this.openAlert(error.response.data)
           this.password = ''
         })
+    },
+    openAlert (message) {
+      this.alertWindow = Alert.create({duration: 3000, html: message, position: 'bottom-center', enter: 'bounceInUp', leave: 'bounceOutDown'})
     },
     closeAlert () {
       if (this.alertWindow) {

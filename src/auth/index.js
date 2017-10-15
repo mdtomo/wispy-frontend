@@ -16,8 +16,12 @@ export default {
   },
 
   getAuthHeader () {
-    return {
-      'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    let jwt = localStorage.getItem('access_token')
+    if (jwt) {
+      return { 'Authorization': 'Bearer ' + jwt }
+    }
+    else {
+      return { 'Authorization': 'Unauthorized' }
     }
   },
 
