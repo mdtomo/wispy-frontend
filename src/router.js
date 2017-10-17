@@ -4,7 +4,7 @@ import VueRouter from 'vue-router'
 import Login from '@/Login.vue'
 import Access from '@/Access.vue'
 import Probes from '@/children/Probes.vue'
-import Profile from '@/children/Profile.vue'
+import Account from '@/children/Account.vue'
 import Admin from '@/children/Admin.vue'
 import auth from './auth'
 
@@ -56,8 +56,8 @@ export default new VueRouter({
           component: Probes
         },
         {
-          path: '/profile',
-          component: Profile
+          path: '/account',
+          component: Account
         },
         {
           path: '/admin',

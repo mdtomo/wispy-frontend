@@ -1,17 +1,17 @@
 <template>
-  <div class="row items-center xs-gutter">
-    <div class="col-3 col-xs-12 col-sm-5">
-      <q-field label="Since" :labelWidth="2" icon="date_range" class="{ margin-left: 30px; }">
+  <div class="row items-center">
+    <div class="col-3 col-xs-12 col-sm-5 relative-position toolbarAligned">
+      <q-field label="Since" :labelWidth="2" icon="date_range">
         <q-datetime v-model="selectedDate" type="datetime" format24h no-clear />
       </q-field>    
     </div>    
-    <div class="col-4 col-xs-12 col-sm-5">    
+    <div class="col-4 col-xs-12 col-sm-5 relative-position toolbarAligned">    
       <q-field :label="probesQty" :labelWidth="2" icon="wifi" inset="icon">
         <q-slider v-model="probesQtySelected" :min="100" :max="1000" :step="2" label square snap />
       </q-field>  
     </div>
-    <div class="col-1 col-xs-12 col-sm-2">
-      <q-btn color="primary">Query</q-btn>
+    <div class="col-1 col-xs-12 col-sm-2 relative-position">
+      <q-btn color="primary" class="queryBtn">Query</q-btn>
     </div>
       <q-data-table :data="probes" :config="config" :columns="columns" @selection="selectedRow">
         <template slot="col-ts" scope="cell">
@@ -130,13 +130,15 @@ export default {
       }
     },
     deleteAlias () {
+      delete this.aliases[this.selectedMac]
+      this.aliasInput = ''
       console.log('Delete alias')
     },
     selectedRow (rows, selection) {
       if (rows > 0) {
         this.selectedMac = selection[0].data.mac
-        if (this.aliases[selection[0].data.mac]) {
-          this.aliasInput = this.aliases[selection[0].data.mac]
+        if (this.aliases[this.selectedMac]) {
+          this.aliasInput = this.aliases[this.selectedMac]
         }
         else {
           this.aliasInput = ''
@@ -147,5 +149,12 @@ export default {
 }
 </script>
 <style scoped>
-.tofront { z-index: -1; } 
+.toolbarAligned {
+  left: 5px;
+}
+.queryBtn {
+  position: relative;
+  margin: 0 auto;
+  display: block;
+}
 </style>
