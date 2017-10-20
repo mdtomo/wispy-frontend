@@ -7,6 +7,7 @@
     </div>    
     <div class="col-4 col-xs-12 col-sm-5 relative-position toolbarAligned">    
       <q-field :label="probesQty" :labelWidth="2" icon="wifi" inset="icon">
+      {{ counter }}
         <q-slider v-model="probesQtySelected" :min="100" :max="1000" :step="2" label square snap />
       </q-field>  
     </div>
@@ -102,12 +103,16 @@ export default {
     }
   },
   computed: {
-    probesQty: function () {
+    probesQty () {
       return 'Probes ' + this.probesQtySelected
+    },
+    counter () {
+      return this.$store.state.count
     }
   },
   methods: {
     getProbes () {
+      this.$store.commit('increment')
       this.$http.get('http://localhost:3003/probes', {
         headers: this.$auth.getAuthHeader()
       })

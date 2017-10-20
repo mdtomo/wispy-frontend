@@ -11,6 +11,7 @@ require(`quasar/dist/quasar.${__THEME}.css`)
 // require(`quasar/dist/quasar.ie.${__THEME}.css`)
 
 import Vue from 'vue'
+import Vuex from 'vuex'
 import Quasar, { QSlider, QDataTable, QField, QInput, QCard, QCardTitle, QCardSeparator, QCardMain, QCardActions, QLayout, QToolbar, QRouteTab, QToolbarTitle, QSideLink, QCollapsible, QList, QListHeader, QItem, QItemSide, QItemMain, QIcon, QBtn, QTabs, QDatetime } from 'quasar'
 import router from './router'
 import axios from 'axios'
@@ -22,7 +23,7 @@ Vue.prototype.$http = axios
 Vue.prototype.$moment = moment
 auth.setAuthState()
 Vue.prototype.$auth = auth
-
+Vue.use(Vuex)
 Vue.use(Quasar, {
   components: {
     QSlider,
@@ -53,16 +54,28 @@ Vue.use(Quasar, {
 }) // Install Quasar Framework
 
 if (__THEME === 'mat') {
-  // require('quasar-extras/roboto-font')
+  require('quasar-extras/roboto-font')
 }
 import 'quasar-extras/material-icons'
 import 'quasar-extras/ionicons'
 import 'quasar-extras/fontawesome'
 import 'quasar-extras/animate'
 
+const store = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment (state) {
+      state.count++
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#q-app',
   router,
+  store,
   render: h => h(require('./App'))
 })

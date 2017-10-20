@@ -14,12 +14,25 @@
 </template>
 
 <script>
+import Socket from 'socket.io-client'
+
 export default {
   name: 'Access',
+  mounted () {
+    this.$nextTick(function () {
+      this.createSocket()
+    })
+  },
   methods: {
     logout () {
       this.$auth.logout()
       this.$router.replace('/')
+    },
+    createSocket () {
+      const socket = Socket('http://localhost:3003')
+      socket.on('connect', function () {
+        console.log('Socket connected')
+      })
     }
   }
 }
