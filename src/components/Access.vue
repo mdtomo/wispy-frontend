@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Socket from 'socket.io-client'
+// import Socket from 'socket.io-client'
 
 export default {
   name: 'Access',
@@ -26,12 +26,19 @@ export default {
   methods: {
     logout () {
       this.$auth.logout()
+      this.$socket.close()
       this.$router.replace('/')
     },
     createSocket () {
-      const socket = Socket('http://localhost:3003')
-      socket.on('connect', function () {
-        console.log('Socket connected')
+      // this.$socket = Socket('http://localhost:3003')
+      this.$socket.open()
+      console.log('From createSocket(): ', this.$socket)
+      this.$socket.on('connect', () => {
+        this.$socket.emit('authorization', { data: { user: 'matt', token: 'let me in' } })
+        console.log('Connected with id: ', this.$socket.id ? this.$socket.id : 'No id')
+        this.$socket.on('wispysvr', (data) => {
+          console.log('wispysvr: ', data)
+        })
       })
     }
   }

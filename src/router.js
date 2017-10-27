@@ -43,7 +43,8 @@ export default new VueRouter({
       component: Access,
       beforeEnter: (to, from, next) => {
         if (!auth.user.authenticated) {
-          next('/')
+          // next('/')
+          next()
         }
         else {
           next()

@@ -40,11 +40,12 @@ export default {
       this.$http.post('http://localhost:3003/login', data
       )
         .then(res => {
-          const token = res['data'].access_token
-          if (token) {
-            localStorage.setItem('access_token', token)
-          }
-          this.$auth.setAuthState()
+          console.log('The response: ', res)
+          // const token = res['data'].access_token
+          // if (token) {
+          //   localStorage.setItem('access_token', token)
+          // }
+          // this.$auth.setAuthState()
           this.$router.replace('probes')
           this.username = ''
           this.password = ''

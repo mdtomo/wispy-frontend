@@ -114,9 +114,10 @@ export default {
     getProbes () {
       this.$store.commit('increment')
       this.$http.get('http://localhost:3003/probes', {
-        headers: this.$auth.getAuthHeader()
+        withCredentials: true
       })
         .then(res => {
+          console.log('The response probes: ', res)
           this.probes = res.data
         })
         .catch(error => {

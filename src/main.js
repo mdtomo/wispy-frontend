@@ -17,12 +17,16 @@ import router from './router'
 import axios from 'axios'
 import moment from 'moment'
 import auth from './auth'
+import socket from 'socket.io-client'
 
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
+Vue.prototype.$http.defaults.withCredentials = true
 Vue.prototype.$moment = moment
 auth.setAuthState()
 Vue.prototype.$auth = auth
+Vue.prototype.$socket = socket('http://localhost:3003', { autoConnect: false, transports: ['websocket'] })
+console.log('Socket prototype ', Vue.prototype.$socket)
 Vue.use(Vuex)
 Vue.use(Quasar, {
   components: {
