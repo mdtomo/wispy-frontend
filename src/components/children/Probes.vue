@@ -2,7 +2,7 @@
   <div class="row items-center">
     <div class="col-3 col-xs-12 col-sm-5 relative-position toolbarAligned">
       <q-field label="Since" :labelWidth="2" icon="date_range">
-        <q-datetime v-model="selectedDate" type="datetime" format24h no-clear />
+        <q-datetime v-model="sinceDate" type="datetime" format24h no-clear />
       </q-field>    
     </div>    
     <div class="col-4 col-xs-12 col-sm-5 relative-position toolbarAligned">    
@@ -12,7 +12,7 @@
       </q-field>  
     </div>
     <div class="col-1 col-xs-12 col-sm-2 relative-position">
-      <q-btn color="primary" class="queryBtn">Query</q-btn>
+      <q-btn color="primary" class="queryBtn" @click="queryProbes">Query</q-btn>
     </div>
       <q-data-table :data="probes" :config="config" :columns="columns" @selection="selectedRow">
         <template slot="col-ts" scope="cell">
@@ -49,7 +49,7 @@ export default {
   },
   data () {
     return {
-      selectedDate: Date(),
+      sinceDate: Date(),
       probesQtySelected: 100,
       config: {
         rowHeight: '50px',
@@ -126,6 +126,9 @@ export default {
             this.$emit('logout-user')
           }
         })
+    },
+    queryProbes () {
+      this.$socket.emit('queryProbes', { data: { sinceDate: this.sinceDate, probesQty: this.probesQty } })
     },
     tsFormat (ts) {
       return this.$moment(parseInt(ts.slice(0, 13))).format('MM/DD/YY, HH:mm:ss:') + ts.slice(10, 16).toString()

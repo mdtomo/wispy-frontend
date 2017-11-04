@@ -27,6 +27,17 @@ export default {
     logout () {
       this.$auth.logout()
       this.$socket.close()
+      this.$http.get('http://localhost:3003/logout')
+        .then(res => {
+          console.log('The logout response: ', res)
+          this.probes = res.data
+        })
+        .catch(error => {
+          if (error.response.status === 401 || error.response.status === 422) {
+            console.log(error.response['data'].msg)
+            // this.$emit('logout-user')
+          }
+        })
       this.$router.replace('/')
     },
     createSocket () {
@@ -38,6 +49,9 @@ export default {
         console.log('Connected with id: ', this.$socket.id ? this.$socket.id : 'No id')
         this.$socket.on('wispysvr', (data) => {
           console.log('wispysvr: ', data)
+        })
+        this.$socket.on('queryProbes', (data) => {
+          console.log('queryProbes: ', data)
         })
       })
     }
